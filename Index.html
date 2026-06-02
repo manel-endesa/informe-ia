@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe Diario IA</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            box-sizing: border-box; /* ✅ SOLUCION DEL PROBLEMA */
+        }
+
+        button {
+            background: #0078D4;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 15px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #005a9e;
+        }
+
+        .resultado {
+            display: none; /* ✅ OCULTO */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Generador de Informe IA</h2>
+
+    <textarea id="texto" rows="6" placeholder="Introduce el texto narrativo..."></textarea>
+
+    <button onclick="generar()">Generar informe</button>
+
+    <div class="resultado" id="resultado"></div>
+
+</div>
+
+<script>
+async function generar() {
+    const texto = document.getElementById("texto").value;
+
+    const response = await fetch("http://localhost:8000/generar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ texto })
+    });
+
+    const data = await response.json();
+
+    const resultadoDiv = document.getElementById("resultado");
+    resultadoDiv.style.display = "block"; // ✅ aparece solo cuando hay resultado
+    resultadoDiv.innerHTML =
+        "<b>Incidencia:</b> " + data.Incidencia + "<br>" +
+        "<b>Impacto:</b> " + data.Impacto;
+}
+</script>
+
+</body>
+</html>
