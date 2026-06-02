@@ -1,3 +1,17 @@
+
+# Agente IA para interpretar incidencias operativas en texto narrativo.
+# 
+# Entrada: texto libre (ejemplo: incidentes SAP, lentitud, en análisis, mismo estado que ayer...)
+#
+# Salida:
+# - Incidencia (resumen corto)
+# - Impacto (efecto en negocio/sistemas)
+# - Estado (en análisis, resuelto, sin cambios...)
+# - Resumen ejecutivo claro
+#
+# El agente debe interpretar lenguaje natural como lo haría un responsable de operaciones.
+
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
